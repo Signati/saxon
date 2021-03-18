@@ -355,9 +355,9 @@ export class Transform {
         // todo
     }
 
-    public async run() {
+    public  run() {
         try {
-            const saxonProc = await commandSync(this.commandline).stdout;
+            const saxonProc = commandSync(this.commandline).stdout;
             return saxonProc;
         } catch (e) {
             throw new Error(e.message);
