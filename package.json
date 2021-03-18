@@ -1,6 +1,6 @@
 {
   "name": "@signati/saxon",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "for node js ",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -39,7 +39,7 @@
     "tsconfig-paths": "^3.9.0",
     "tslint": "^5.20.0",
     "tslint-config-prettier": "^1.18.0",
-    "typescript": "^3.6.4"
+    "typescript": "^3.9.9"
   },
   "files": [
     "lib/**/*"
