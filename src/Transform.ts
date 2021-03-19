@@ -5,7 +5,7 @@ import {platform} from 'os';
 export class Transform {
     public commandline = '';
     public commandlineArray: string[] = [];
-    private saxonBin: string = 'openssl';
+    private saxonBin: string = '';
 
     constructor() {
         this.saxonBin = this.getOS();
@@ -369,7 +369,7 @@ export class Transform {
         if (platform() === 'win32') {
             return 'transform.exe';
         } else if (platform() === 'linux') {
-            return 'transform';
+            return 'saxon-xslt';
         } else if (platform() === 'darwin') {
             return 'transform';
             // var chilkat = require('@chilkat/ck-node11-macosx');
