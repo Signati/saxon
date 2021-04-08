@@ -1,13 +1,15 @@
 import {commandSync} from 'execa'
 import {existsSync} from 'fs';
 import {platform} from 'os';
+import {CliShare} from './cliShare';
 
-export class Transform {
+export class Transform extends CliShare {
     public commandline = '';
     public commandlineArray: string[] = [];
-    private saxonBin: string = '';
+    public saxonBin: string = '';
 
     constructor() {
+        super();
         this.saxonBin = this.getOS();
         this.commandline = this.saxonBin
     }
@@ -18,29 +20,13 @@ export class Transform {
         return this;
     }
 
-    public catalog(filenames: any) {
-        this.commandline += ` -catalog:${filenames}`;
-        this.commandlineArray.push(`-catalog:${filenames}`);
-        return this;
-    }
-
-    public dtd(options: 'on' | 'off' | 'recover') {
-        this.commandline += ` -dtd:${options}`;
-        this.commandlineArray.push(`-dtd:${options}`);
-        return this;
-    }
-
     public ea(options: 'on' | 'off') {
         this.commandline += ` -ea:${options}`;
         this.commandlineArray.push(`-ea:${options}`);
         return this;
     }
 
-    public expand(options: 'on' | 'off') {
-        this.commandline += ` -expand:${options}`;
-        this.commandlineArray.push(`-expand:${options}`);
-        return this;
-    }
+
 
     public explain(filename: any) {
         this.commandline += ` -explain:${filename}`;
@@ -54,21 +40,9 @@ export class Transform {
         return this;
     }
 
-    public ext(options: 'on' | 'off') {
-        this.commandline += ` -ext:${options}`;
-        this.commandlineArray.push(`-ext:${options}`);
-        return this;
-    }
-
     public im(modename: any) {
         this.commandline += ` -im:${modename}`;
         this.commandlineArray.push(`-im:${modename}`);
-        return this;
-    }
-
-    public init(initializer: any) {
-        this.commandline += ` -init:${initializer}`;
-        this.commandlineArray.push(`-init:${initializer}`);
         return this;
     }
 
@@ -85,11 +59,6 @@ export class Transform {
         return this;
     }
 
-    public l(options: 'on' | 'off') {
-        this.commandline += ` -l:${options}`;
-        this.commandlineArray.push(`-l:${options}`);
-        return this;
-    }
 
     public lib(filenames: any) {
         this.commandline += ` -lib:${filenames}`;
@@ -115,30 +84,12 @@ export class Transform {
         return this;
     }
 
-    public now(format: any) {
-        this.commandline += ` -now:${format}`;
-        this.commandlineArray.push(`-now:${format}`);
-        return this;
-    }
-
     public ns(options: 'uri' | '##any' | '##html5') {
         this.commandline += ` -ns:${options}`;
         this.commandlineArray.push(`-ns:${options}`);
         return this;
     }
 
-    public o(filename: string) {
-        this.commandline += ` -o:${filename}`;
-        this.commandlineArray.push(`-o:${filename}`);
-        return this;
-    }
-
-
-    public opt(flags: 'c' | 'd' | 'e' | 'f' | 'g' | 'j' | 'k' | 'l' | 'm' | 'n' | 'r' | 's' | 't' | 'v' | 'w' | 'x') {
-        this.commandline += ` -opt:-${flags}`;
-        this.commandlineArray.push(`-opt:-${flags}`);
-        return this;
-    }
 
     public or(classname: any) {
         this.commandline += ` -or:${classname}`;
@@ -355,7 +306,7 @@ export class Transform {
         // todo
     }
 
-    public  run() {
+    public run() {
         try {
             const saxonProc = commandSync(this.commandline).stdout;
             return saxonProc;
