@@ -30,6 +30,42 @@ export class Query extends CliShare {
         return this;
     }
 
+    public projection(options: 'on' | 'off') {
+        this.commandline += ` -projection:${options}`;
+        this.commandlineArray.push(`-projection:${options}`);
+        return this;
+    }
+
+    public q(queryfile: any) {
+        this.commandline += ` -q:${queryfile}`;
+        this.commandlineArray.push(`-q:${queryfile}`);
+        return this;
+    }
+
+    public qs(querystring: any) {
+        this.commandline += ` -qs:${querystring}`;
+        this.commandlineArray.push(`-qs:${querystring}`);
+        return this;
+    }
+
+    public stream(options: 'on' | 'off') {
+        this.commandline += ` -stream:${options}`;
+        this.commandlineArray.push(`-stream:${options}`);
+        return this;
+    }
+
+    public update(options: 'on' | 'off' | 'discard') {
+        this.commandline += ` -update:${options}`;
+        this.commandlineArray.push(`-update:${options}`);
+        return this;
+    }
+
+    public wrap() {
+        this.commandline += ` -wrap`;
+        this.commandlineArray.push(`-wrap`);
+        return this;
+    }
+
     private getOS(): string {
         if (platform() === 'win32') {
             return 'query.exe';
